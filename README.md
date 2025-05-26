@@ -22,5 +22,16 @@ This code is for the **arduinoIDE>** version **2.0** & newer.
 
 ### IMPORTANT ###
 
-For this code to work correctly, Espressif boards version 2.0.14 must be installe in Arduino IDE. 
+For this code to work correctly, Espressif boards version **2.0.1x** must be installe in Arduino IDE.
 
+
+
+The USB Wrapper library used, dosent let users change the Interface protocol, although some devices require it.
+The "Keyboard" interface protocol can be forced by directly editing the TinyUSB library.
+
+To do this, open the **Hid.h** at <br>`/arduino15/packages/esp32/hardware/esp32/2.0.15/tools/sdk/esp32s3/include/arduino_tinyusb/tinyusb/src/class/hid/hid.h`
+and change the line 70 from `HID_ITF_PROTOCOL_NONE     = 0, ///< None` to:
+`HID_ITF_PROTOCOL_NONE     = 1, ///< None`.
+
+After the change, every compiled HID device will be forced into "keyboard" interface mode.
+to revert the change, one can simply reinstall the Esp32 board package.
