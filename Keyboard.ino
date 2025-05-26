@@ -1,10 +1,3 @@
-/*
- * @Description: USB Device Keyboard HID Slave Test
- * @Author: LILYGO_L
- * @Date: 2024-01-04 17:53:29
- * @LastEditTime: 2024-09-05 11:42:01
- * @License: GPL 3.0
- */
 #include <Arduino.h>
 #include "T-Keyboard-S3-Pro_Drive.h"
 #include "pin_config.h"
@@ -133,7 +126,7 @@ void IIC_KEY_Read_Loop(void)
 {
     if (IIC_Device_ID_Registry_Scan.size() > 0)
     {
-        // 扫描到的所有设备都接收数据
+
         for (int i = 0; i < IIC_Device_ID_Registry_Scan.size(); i++)
         {
             IIC_Bus->IIC_ReadC8_Data(IIC_Device_ID_Registry_Scan[i], T_KEYBOARD_S3_PRO_RD_KEY_TRIGGER,
@@ -319,8 +312,6 @@ void KNOB_Trigger_Loop(void)
 
 void Task1(void *pvParameters)
 {
-    // 在这里可以添加一些代码，这样的话这个任务执行时会先执行一次这里的内容
-    // 当然后面进入while循环之后不会再执行这部分了
     while (1)
     {
         if (millis() > IIC_Bus_CycleTime)
