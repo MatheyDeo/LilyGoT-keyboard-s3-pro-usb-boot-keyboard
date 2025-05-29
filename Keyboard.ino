@@ -5,7 +5,6 @@
 #include "icon_16Bit.h"
 #include "USB.h"
 #include "USBHIDKeyboard.h"
-#include "USBHIDConsumerControl.h"
 #include "Arduino_DriveBus_Library.h"
 
 #define KEY1_SET KEY_LEFT_ARROW
@@ -58,7 +57,6 @@ std::shared_ptr<Arduino_IIC_DriveBus> IIC_Bus =
 std::vector<T_Keyboard_S3_Pro_Device_KEY> KEY_Trigger;
 
 USBHIDKeyboard Keyboard;
-USBHIDConsumerControl ConsumerControl;
 
 /*LCD*/
 bool IIC_Device_ID_State = false;
@@ -302,26 +300,28 @@ void KNOB_Trigger_Loop(void)
         case KNOB_State::KNOB_INCREMENT:
             KNOB_Data++;
             Serial.printf("\nKNOB_Data: %d\n", KNOB_Data);
-            ConsumerControl.press(CONSUMER_CONTROL_VOLUME_INCREMENT);
-            ConsumerControl.release();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            delay(200);
+            Keyboard.press(KEY2_SET);
+            delay(20);
+            Keyboard.release(KEY2_SET);
+            delay(50);
+
             break;
         case KNOB_State::KNOB_DECREMENT:
             KNOB_Data--;
             Serial.printf("\nKNOB_Data: %d\n", KNOB_Data);
-            ConsumerControl.press(CONSUMER_CONTROL_VOLUME_DECREMENT);
-            ConsumerControl.release();
-            delay(200);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            Keyboard.press(KEY3_SET);
+            delay(20);
+            Keyboard.release(KEY3_SET);
+            delay(50);
+
             break;
 
         default:
             break;
         }
-    }
-    else
-    {
-        ConsumerControl.release();
     }
 }
 
@@ -480,7 +480,6 @@ void setup()
     delay(100);
 
     Keyboard.begin();
-    ConsumerControl.begin();
     USB.begin();
 
     /*LCD*/
