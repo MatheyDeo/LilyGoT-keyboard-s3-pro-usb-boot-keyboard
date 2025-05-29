@@ -1,9 +1,12 @@
-#include <Arduino.h>
-#include "T-Keyboard-S3-Pro_Drive.h"
-#include "pin_config.h"
-#include <USB.h>
-#include <USBHIDKeyboard.h>
-#include "Arduino_DriveBus_Library.h"
+#include <Arduino.h> //ok
+#include "T-Keyboard-S3-Pro_Drive.h" //ok
+#include "pin_config.h" //ok
+#include "Arduino_GFX_Library.h"
+#include "icon_16Bit.h"
+#include "USB.h" //ok
+#include "USBHIDKeyboard.h" //ok
+#include "Arduino_DriveBus_Library.h" //ok?
+
 
 // #define KEY1_SET KEY_LEFT_CTRL
 // #define KEY2_SET 'c'
