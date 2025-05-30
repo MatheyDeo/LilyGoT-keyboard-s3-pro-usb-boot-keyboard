@@ -542,8 +542,7 @@ void loop()
 {
     IIC_KEY_Read_Loop();
     IIC_KEY_Trigger_Loop();
-    if (millis() > K
-    NOB_CycleTime)
+    if (millis() > KNOB_CycleTime)
     {
         KNOB_Logical_Scan_Loop();
         KNOB_CycleTime = millis() + 20; // 20ms
