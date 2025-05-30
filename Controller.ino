@@ -47,7 +47,17 @@ uint8_t KEY4_Lock = 0;
 uint8_t KEY4_Press_Delay = 0;
 uint8_t KEY5_Lock = 0;
 uint8_t KEY5_Press_Delay = 0;
-
+/*
+sdfghjklů§¨jklů§¨klů§¨k,l.ů-§'
+kjlů§¨lů§¨§¨§ů¨lů§¨
+klůůkltvrevt
+klůrev0
+tsertvesrres
+klůtservtverattv
+kgresvtrelůes
+klůtvrest
+kůlerstv
+l*/
 
 std::vector<unsigned char> IIC_Device_ID_Registry_Scan;
 
@@ -528,7 +538,7 @@ void setup()
         else
         {
             Serial.println("IIC ID not found");
-            delay(1000);
+            delay(200);
         }
     }
 
