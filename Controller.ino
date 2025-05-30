@@ -2,7 +2,6 @@
 #include "T-Keyboard-S3-Pro_Drive.h"
 #include "pin_config.h"
 #include "Arduino_GFX_Library.h"
-#include "icon_16Bit.h"
 #include "USB.h"
 #include "USBHIDKeyboard.h"
 #include "Arduino_DriveBus_Library.h"
@@ -47,20 +46,7 @@ uint8_t KEY4_Lock = 0;
 uint8_t KEY4_Press_Delay = 0;
 uint8_t KEY5_Lock = 0;
 uint8_t KEY5_Press_Delay = 0;
-<<<<<<< HEAD
-=======
-/*
-sdfghjklů§¨jklů§¨klů§¨k,l.ů-§'
-kjlů§¨lů§¨§¨§ů¨lů§¨
-klůůkltvrevt
-klůrev0
-tsertvesrres
-klůtservtverattv
-kgresvtrelůes
-klůtvrest
-kůlerstv
-l*/
->>>>>>> 0845876be1e2856cd0ac21e8ea36c7d6a07fc743
+
 
 std::vector<unsigned char> IIC_Device_ID_Registry_Scan;
 
@@ -444,7 +430,7 @@ void Iocn_Show(std::vector<unsigned char> device_id)
                                T_KEYBOARD_S3_PRO_WR_LCD_CS, 0B00000001);
         delay(IIC_LCD_CS_DEVICE_DELAY);
     }
-    gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_note, 128, 128);
+    //gfx->draw16bitRGBBitmap(0, 0, (uint16_t *)gImage_note, 128, 128);
 
     Select_Screen_All(device_id, false);
 }
@@ -476,21 +462,18 @@ void Print_IIC_Info(std::vector<unsigned char> device_id)
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("Ciallo");
 
     pinMode(KNOB_DATA_A, INPUT_PULLUP);
     pinMode(KNOB_DATA_B, INPUT_PULLUP);
 
     while (IIC_Bus->begin() == false)
     {
-        Serial.println("IIC_Bus initialization fail");
-        delay(2000);
+        delay(1000);
     }
-    Serial.println("IIC_Bus initialization successfully");
 
     xTaskCreatePinnedToCore(Task1, "Task1", 10000, NULL, 1, NULL, 1);
 
-    delay(100);
+    delay(50);
 
     Keyboard.begin();
     USB.begin();
@@ -498,11 +481,11 @@ void setup()
     /*LCD*/
     pinMode(LCD_RST, OUTPUT);
     digitalWrite(LCD_RST, HIGH);
-    delay(100);
+    delay(50);
     digitalWrite(LCD_RST, LOW);
-    delay(100);
+    delay(50);
     digitalWrite(LCD_RST, HIGH);
-    delay(100);
+    delay(50);
     ledcAttachPin(LCD_BL, 1);
     ledcSetup(1, 2000, 8);
     ledcWrite(1, 0); // brightness 0 - 255
@@ -535,19 +518,18 @@ void setup()
 
         if (temp == true)
         {
-            Serial.println("IIC_Bus select LCD_CS successful");
             break;
         }
         else
         {
-            Serial.println("IIC ID not found");
-            delay(200);
+            //Serial.println("IIC ID not found");
+            delay(50);
         }
     }
 
     if (IIC_Bus->IIC_ReadC8_Delay_Data(IIC_MAIN_DEVICE_ADDRESS, T_KEYBOARD_S3_PRO_RD_DRIVE_FIRMWARE_VERSION, 20, &IIC_Master_Receive_Data, 1) == true)
     {
-        Serial.printf("STM32 dirve firmware version: %#X \n", IIC_Master_Receive_Data);
+        //Serial.printf("STM32 dirve firmware version: %#X \n", IIC_Master_Receive_Data);
     }
 
     std::vector<unsigned char> vector_temp;
@@ -560,7 +542,8 @@ void loop()
 {
     IIC_KEY_Read_Loop();
     IIC_KEY_Trigger_Loop();
-    if (millis() > KNOB_CycleTime)
+    if (millis() > K
+    NOB_CycleTime)
     {
         KNOB_Logical_Scan_Loop();
         KNOB_CycleTime = millis() + 20; // 20ms
